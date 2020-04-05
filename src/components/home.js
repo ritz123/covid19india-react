@@ -4,7 +4,6 @@ import {formatDistance} from 'date-fns';
 import {
   formatDate,
   formatDateAbsolute,
-  validateCTS,
 } from '../utils/common-functions';
 /* import * as Icon from 'react-feather';
 import {Link} from 'react-router-dom';*/
@@ -42,19 +41,20 @@ function Home(props) {
         /* axios.get('https://api.covid19india.org/raw_data.json'),*/
       ]);
       setStates(response.data.statewise);
+
       var plen = response.data.cases_time_series.length -1 ;
       var d = new Date();
-      var mth = ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var mth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       response.data.cases_time_series.push({
-        "dailyconfirmed": response.data.key_values[0]['confirmeddelta'],
-        "dailydeceased": response.data.key_values[0]['deceaseddelta'],
-        "dailyrecovered": response.data.key_values[0]['recovereddelta'],
+        "dailyconfirmed": parseInt(response.data.statewise[0]['confirmed']) - parseInt(response.data.cases_time_series[plen]['totalconfirmed']),
+        "dailydeceased": parseInt(response.data.statewise[0]['deaths']) - parseInt(response.data.cases_time_series[plen]['totaldeceased']),
+        "dailyrecovered": parseInt(response.data.statewise[0]['recovered']) - parseInt(response.data.cases_time_series[plen]['totalrecovered']),
         "date": d.getDate() + ' ' + mth[d.getMonth()] + ' ',
-        "totalconfirmed": parseInt(response.data.cases_time_series[plen]['totalconfirmed']) + parseInt(response.data.key_values[0]['confirmeddelta']),
-        "totaldeceased": parseInt(response.data.cases_time_series[plen]['totaldeceased']) + parseInt(response.data.key_values[0]['deceaseddelta']),
-        "totalrecovered": parseInt(response.data.cases_time_series[plen]['totalrecovered']) + parseInt(response.data.key_values[0]['recovereddelta'])
+        "totalconfirmed": response.data.statewise[0]['confirmed'],
+        "totaldeceased": response.data.statewise[0]['deaths'],
+        "totalrecovered": response.data.statewise[0]['recovered']
       });
-      setTimeseries(validateCTS(response.data.cases_time_series));
+      setTimeseries((response.data.cases_time_series));
       setLastUpdated(response.data.statewise[0].lastupdatedtime);
       setStateDistrictWiseData(stateDistrictWiseResponse.data);
       /* setPatients(rawDataResponse.data.raw_data.filter((p) => p.detectedstate));*/
