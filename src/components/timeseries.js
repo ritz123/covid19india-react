@@ -297,7 +297,7 @@ function TimeSeries(props) {
             <h5>Confirmed</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">
@@ -330,7 +330,7 @@ function TimeSeries(props) {
             <h5>Recovered</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">
@@ -363,7 +363,7 @@ function TimeSeries(props) {
             <h5>Deceased</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">
@@ -401,7 +401,7 @@ function TimeSeries(props) {
             <h5>Confirmed</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">
@@ -434,7 +434,7 @@ function TimeSeries(props) {
             <h5>Recovered</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">
@@ -467,7 +467,7 @@ function TimeSeries(props) {
             <h5>Deceased</h5>
             <h5>
               {isYesterday
-                ? `${datapoint['date']} Yesterday`
+                ? `${datapoint['date']} Today`
                 : datapoint['date']}
             </h5>
             <div className="stats-bottom">

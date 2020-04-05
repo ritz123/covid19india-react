@@ -42,6 +42,18 @@ function Home(props) {
         /* axios.get('https://api.covid19india.org/raw_data.json'),*/
       ]);
       setStates(response.data.statewise);
+      var plen = response.data.cases_time_series.length -1 ;
+      var d = new Date();
+      var mth = ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      response.data.cases_time_series.push({
+        "dailyconfirmed": response.data.key_values[0]['confirmeddelta'],
+        "dailydeceased": response.data.key_values[0]['deceaseddelta'],
+        "dailyrecovered": response.data.key_values[0]['recovereddelta'],
+        "date": d.getDate() + ' ' + mth[d.getMonth()] + ' ',
+        "totalconfirmed": parseInt(response.data.cases_time_series[plen]['totalconfirmed']) + parseInt(response.data.key_values[0]['confirmeddelta']),
+        "totaldeceased": parseInt(response.data.cases_time_series[plen]['totaldeceased']) + parseInt(response.data.key_values[0]['deceaseddelta']),
+        "totalrecovered": parseInt(response.data.cases_time_series[plen]['totalrecovered']) + parseInt(response.data.key_values[0]['recovereddelta'])
+      });
       setTimeseries(validateCTS(response.data.cases_time_series));
       setLastUpdated(response.data.statewise[0].lastupdatedtime);
       setStateDistrictWiseData(stateDistrictWiseResponse.data);
